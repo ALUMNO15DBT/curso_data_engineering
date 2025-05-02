@@ -62,18 +62,18 @@ sources:
         - name: _fivetran_deleted
         - name: _fivetran_synced
 
-    - name: orders_items
-      #loaded_at_field:  _fivetran_synced
-      # columns:
+    # - name: orders_items
+    #   # loaded_at_field:  _fivetran_synced
+    #   columns:
 
-    - name: products
-      #loaded_at_field:  _fivetran_synced
-      # columns:
+    # - name: products
+    #   # loaded_at_field:  _fivetran_synced
+    #   columns:
 
-    - name: promos
-      #loaded_at_field:  _fivetran_synced
-      # columns:
+    # - name: promos
+    #   # loaded_at_field:  _fivetran_synced
+    #   columns:
         
-    - name: users
-      #loaded_at_field:  _fivetran_synced
-      # columns:
+    # - name: users
+    #   # loaded_at_field:  _fivetran_synced
+    #   columns:
