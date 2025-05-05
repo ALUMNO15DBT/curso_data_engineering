@@ -1,12 +1,23 @@
+version: 2
+
 sources:
   - name: sql_server_dbo
     description: ""
     database: alumno15_dev_bronze_db
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
     tables:
       - name: addresses
         description: ""
         columns:
           - name: address_id
+            tests:
+              - unique
+              - not_null
             data_type: varchar
             description: ""
           - name: zipcode
@@ -32,6 +43,9 @@ sources:
         description: ""
         columns:
           - name: event_id
+            tests:
+              - unique
+              - not_null
             data_type: varchar
             description: ""
           - name: page_url
@@ -66,9 +80,18 @@ sources:
         description: ""
         columns:
           - name: order_id
+            tests:
+              - unique
+              - not_null
             data_type: varchar
             description: ""
           - name: product_id
+            tests:
+              - unique
+              - relationships:
+                  to: source('sql_server_db','products')
+                  field: product_id
+              - not_null
             data_type: varchar
             description: ""
           - name: quantity
@@ -207,4 +230,3 @@ sources:
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
-Cloud CLI invocation created: 390a8cec-fe91-4794-b30d-c93a10c1f68a
