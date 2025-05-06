@@ -4,7 +4,7 @@
   )
 }}
 
-WITH src_budget AS (
+WITH src_promos AS (
     SELECT * 
     FROM {{ ref("base_google_sheets__budget") }}
     ),
@@ -16,7 +16,7 @@ renamed_casted AS (
         , quantity
         , month
         , _fivetran_synced AS date_load
-    FROM src_budget
+    FROM src_promos
     )
 
 SELECT * FROM renamed_casted
