@@ -3,8 +3,8 @@ version: 2
 sources:
   - name: sql_server_dbo
     description: ""
-    database: alumno15_dev_bronze_db
-
+    database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB"  # this is the name of our database
+    
     quoting:
       database: false
       schema: false
