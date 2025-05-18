@@ -42,6 +42,8 @@ models:
         +schema: google_sheets
       sql_server_dbo:
         +schema: sql_server_dbo
+      kaggle:
+        +schema: kaggle
       
     marts:
       +materialized: table

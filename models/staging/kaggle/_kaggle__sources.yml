@@ -1,0 +1,397 @@
+version: 2
+
+sources:
+  - name: kaggle # name of the source
+    schema: kaggle # this is the schema our raw data lives in
+    database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB" # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: amd_stock
+        description: "AMD Stock value through the years"
+        columns:
+          - name: DATE
+            description: "Stock market day"
+            tests:
+              - unique
+              - not_null
+          - name: OPEN
+            description: "stock values when the market has open"
+            tests:
+              - not_null
+              - positive_values
+          - name: HIGH
+            description: "Maximum stock value of the day"
+            tests:
+              - not_null
+              - positive_values
+          - name: LOW
+            description: "Maximum stock value of the day"
+            tests:
+              - not_null
+              - positive_values
+          - name: CLOSE
+            description: "Last stock value of the day"
+            tests:
+              - not_null
+              - positive_values
+
+      - name: chip_dataset
+        description: "GPU & CPU general data"
+        columns:
+          - name: ORDERS
+            description: "Unique order identifier"
+            tests:
+              - unique
+              - not_null
+
+          - name: PRODUCT
+            description: "Product name"
+            tests:
+              - not_null
+
+          - name: TYPES
+            description: "Chip type or category"
+            tests:
+              - not_null
+
+          - name: RELEASE_DATE
+            description: "Release date"
+            tests:
+              - not_null
+
+          - name: PROCESS_SIZE_NM
+            description: "Process size in nanometers"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: TDP_W
+            description: "Thermal Design Power (Watts)"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: DIE_SIZE_MMSQUARE
+            description: "Die area in mm²"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: TRANSISTORS_MILLIONS
+            description: "Number of transistors in millions"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: FREQ_MHZ
+            description: "Nominal frequency in MHz"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: FOUNDRY
+            description: "Foundry or process manufacturer"
+            tests:
+              - not_null
+
+          - name: VENDOR
+            description: "Chip brand or vendor"
+            tests:
+              - not_null
+
+          - name: FP16_GFLOPS
+            description: "FP16 performance in GFLOPS"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: FP32_GFLOPS
+            description: "FP32 performance in GFLOPS"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: FP64_GFLOPS
+            description: "FP64 performance in GFLOPS"
+            tests:
+              - not_null
+              - positive_values
+
+      - name: cpudata
+        description: "CPU general data only"
+        columns:
+          - name: NAME
+            description: "Processor name"
+            tests:
+              - not_null
+          - name: PRICE
+            description: "Processor price"
+            tests:
+              - not_null
+          - name: PRODUCER
+            description: "Processor manufacturer"
+            tests:
+              - not_null
+          - name: MPN
+            description: "Manufacturer Part Number"
+            tests:
+              - not_null
+          - name: EAN
+            description: "European Article Number of the product"
+            tests:
+              - unique
+              - not_null
+          - name: UPC
+            description: "Universal Product Code"
+            tests:
+              - unique
+              - not_null
+          - name: BASE_CLOCK
+            description: "Base frequency of the processor"
+            tests:
+              - not_null
+          - name: TURBO_CLOCK
+            description: "Maximum boost frequency (Turbo Clock)"
+            tests:
+              - not_null
+          - name: UNLOCKED_MULTIPLIER
+            description: "Indicates if the processor has an unlocked multiplier"
+            tests:
+              - not_null
+          - name: CORES
+            description: "Number of physical cores in the processor"
+            tests:
+              - not_null
+          - name: THREADS
+            description: "Number of threads supported by the processor"
+            tests:
+              - not_null
+          - name: TDP
+            description: "Thermal Design Power (TDP) in watts"
+            tests:
+              - not_null
+          - name: SOCKET
+            description: "Socket type supported by the processor"
+            tests:
+              - not_null
+          - name: INTEGRATED_GPU
+            description: "Indicates whether the processor includes an integrated GPU"
+            tests:
+              - not_null
+          - name: PRODUCT_PAGE
+            description: "URL to the product's official page"
+            tests:
+              - not_null
+      - name: gpudata
+        description: "Intermediate model of GPU specifications"
+        columns:
+          - name: NAME
+            description: "Product name"
+            tests:
+              - not_null
+
+          - name: PRICE
+            description: "Product price"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: PRODUCER
+            description: "Product producer"
+            tests:
+              - not_null
+
+          - name: MPN
+            description: "Manufacturer Part Number"
+            tests:
+              - not_null
+              - unique
+
+          - name: EAN
+            description: "European Article Number"
+            tests:
+              - not_null
+              - unique
+
+          - name: UPC
+            description: "Universal Product Code"
+            tests:
+              - not_null
+              - unique
+
+          - name: LENGTH
+            description: "Card length"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: SLOTS
+            description: "Number of expansion slots required"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: EIGHT_PIN_CONNECTORS
+            description: "Count of 8pin power connectors"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: SIX_PIN_CONNECTORS
+            description: "Count of 6pin power connectors"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: HDMI
+            description: "Number of HDMI ports"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: DISPLAYPORT
+            description: "Number of DisplayPort ports"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: DVI
+            description: "Number of DVI ports"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: VGA
+            description: "Number of VGA ports"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: BOOST_CLOCK
+            description: "Boost clock speed"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: VRAM
+            description: "Video memory capacity"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: MEMORY_CLOCK
+            description: "Memory clock speed"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: TDP
+            description: "Thermal Design Power"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: PRODUCT_PAGE
+            description: "URL of the product page"
+            tests:
+              - not_null
+
+      - name: intel_stock
+        description: "Intel Stock value through the years"
+        columns:
+          - name: DATE
+            description: "Trading day"
+            tests:
+              - unique
+              - not_null
+
+          - name: OPEN
+            description: "Opening price"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: HIGH
+            description: "Highest price of the day"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: LOW
+            description: "Lowest price of the day"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: CLOSE
+            description: "Closing price"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: VOLUME
+            description: "Number of shares traded"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: DIVIDENDS
+            description: "Dividend amount paid"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: STOCKS_SPLITS
+            description: "Stock split ratio"
+            tests:
+              - not_null
+              - positive_values 
+      - name: nvidia_stock
+        description: "NVIDIA Stock value through the years"
+        columns:
+          - name: DATE
+            description: "Trading day"
+            tests:
+              - unique
+              - not_null
+
+          - name: OPEN
+            description: "Opening price"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: HIGH
+            description: "Highest price of the day"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: LOW
+            description: "Lowest price of the day"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: CLOSE
+            description: "Closing price"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: ADJ_CLOSE
+            description: "Adjusted closing price"
+            tests:
+              - not_null
+              - positive_values
+
+          - name: VOLUME
+            description: "Number of shares traded"
+            tests:
+              - not_null
+              - positive_values
