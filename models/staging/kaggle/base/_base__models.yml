@@ -20,7 +20,7 @@ models:
     columns:
       - name: orders
         data_type: varchar
-      - name: product
+      - name: chip
         data_type: varchar
       - name: types
         data_type: varchar
