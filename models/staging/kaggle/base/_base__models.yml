@@ -1,3 +1,4 @@
+
 version: 2
 
 sources:
@@ -30,7 +31,7 @@ sources:
             data_type: number
           - name: product
             data_type: varchar
-          - name: types
+          - name: type
             data_type: varchar
           - name: release_date
             data_type: date
@@ -170,3 +171,32 @@ sources:
             data_type: number
           - name: date_load
             data_type: timestamp_tz
+
+      - name: stg_gpuchips
+        columns:
+          - name: ordinal
+            data_type: number
+          - name: product
+            data_type: varchar
+          - name: release_date
+            data_type: date
+          - name: process_size_nm
+            data_type: number
+          - name: tdp_w
+            data_type: number
+          - name: die_size_mmsquare
+            data_type: number
+          - name: transistors_million
+            data_type: number
+          - name: freq_mhz
+            data_type: number
+          - name: foundry
+            data_type: varchar
+          - name: vendor
+            data_type: varchar
+          - name: fp16_gflops
+            data_type: float
+          - name: fp32_gflops
+            data_type: float
+          - name: fp64_gflops
+            data_type: float
