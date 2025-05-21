@@ -2,14 +2,14 @@
 
 with
     referencias_clean as (
-        select chip_id, product from {{ ref("base_kaggle__chip_dataset") }}
+        select chip_id, chip from {{ ref("base_kaggle__chip_dataset") }}
     ),
 
     coincidencias as (
         select
             g.gpu_id,
             g.name,
-            r.product,
+            r.chip,
             g.price_usd,
             g.producer,
             g.mpn,
@@ -28,10 +28,10 @@ with
             g.tdp_w,
             g.product_page,
             row_number() over (
-                partition by g.name order by length(r.product) desc
+                partition by g.name order by length(r.chip) desc
             ) as rn
         from {{ ref("base_kaggle__gpudata") }} g
-        join referencias_clean r on lower(g.name) like '%' || lower(r.product) || '%'
+        join referencias_clean r on lower(g.name) like '%' || lower(r.chip) || '%'
     ),
 
     filtrado as (select * from coincidencias where rn = 1)
@@ -39,7 +39,7 @@ with
 select
     gpu_id,
     name,
-    product,  -- viene de stg_gpuchips vía join
+    chip,
     price_usd,
     producer,
     mpn,

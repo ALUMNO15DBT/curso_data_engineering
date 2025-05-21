@@ -7,7 +7,7 @@ models:
         data_type: varchar
       - name: ordinal
         data_type: number
-      - name: product
+      - name: chip
         data_type: varchar
       - name: release_date
         data_type: date
@@ -32,7 +32,7 @@ models:
         data_type: varchar
       - name: name
         data_type: varchar
-      - name: product
+      - name: chip
         data_type: varchar
       - name: price
         data_type: float
@@ -69,7 +69,7 @@ models:
         data_type: varchar
       - name: ordinal
         data_type: number
-      - name: product
+      - name: chip
         data_type: varchar
       - name: release_date
         data_type: date
@@ -100,7 +100,7 @@ models:
         data_type: varchar
       - name: name
         data_type: varchar
-      - name: product
+      - name: chip
         data_type: varchar
       - name: price_usd
         data_type: float

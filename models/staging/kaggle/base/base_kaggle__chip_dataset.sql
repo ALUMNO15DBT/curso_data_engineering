@@ -12,7 +12,7 @@ with
                 when product ilike 'NVIDIA %'
                 then substr(product, length('NVIDIA ') + 1)
                 else product
-            end as product,
+            end as chip,
 
             case
                 when upper(trim(types)) in ('GPU', 'CPU')
@@ -42,9 +42,9 @@ with
 
     chip_dataset_newid as (
         select
-            {{ dbt_utils.generate_surrogate_key(["ordinal", "product"]) }} as chip_id,
+            {{ dbt_utils.generate_surrogate_key(["ordinal", "chip"]) }} as chip_id,
             ordinal,
-            product,
+            chip,
             type,
             release_date,
             process_size_nm,
