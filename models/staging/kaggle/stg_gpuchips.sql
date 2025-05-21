@@ -17,7 +17,7 @@ with
         select
             chip_id,
             ordinal,
-            product,
+            chip,
             release_date,
             process_size_nm,
             tdp_w,
