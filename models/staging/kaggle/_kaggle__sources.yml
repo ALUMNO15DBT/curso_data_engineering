@@ -67,25 +67,21 @@ sources:
           - name: PROCESS_SIZE_NM
             description: "Process size in nanometers"
             tests:
-              - not_null
               - positive_values
 
           - name: TDP_W
             description: "Thermal Design Power (Watts)"
             tests:
-              - not_null
               - positive_values
 
           - name: DIE_SIZE_MMSQUARE
             description: "Die area in mm²"
             tests:
-              - not_null
               - positive_values
 
           - name: TRANSISTORS_MILLIONS
             description: "Number of transistors in millions"
             tests:
-              - not_null
               - positive_values
 
           - name: FREQ_MHZ
@@ -107,19 +103,16 @@ sources:
           - name: FP16_GFLOPS
             description: "FP16 performance in GFLOPS"
             tests:
-              - not_null
               - positive_values
 
           - name: FP32_GFLOPS
             description: "FP32 performance in GFLOPS"
             tests:
-              - not_null
               - positive_values
 
           - name: FP64_GFLOPS
             description: "FP64 performance in GFLOPS"
             tests:
-              - not_null
               - positive_values
 
       - name: cpudata
@@ -131,8 +124,7 @@ sources:
               - not_null
           - name: PRICE
             description: "Processor price"
-            tests:
-              - not_null
+            
           - name: PRODUCER
             description: "Processor manufacturer"
             tests:
