@@ -20,7 +20,7 @@ WITH amd AS (
 intel AS (
     SELECT 
         market_id,
-        'INTEL' AS vendor,
+        'Intel' AS vendor,
         date,
         close,
         open,
@@ -48,3 +48,4 @@ UNION ALL
 SELECT * FROM intel
 UNION ALL
 SELECT * FROM nvidia
+
