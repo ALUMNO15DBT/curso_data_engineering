@@ -13,7 +13,7 @@ with
     cleaned_data as (
 
         select
-            {{ dbt_utils.generate_surrogate_key(["NAME", "MPN", "socket_cleaned"]) }}
+            {{ dbt_utils.generate_surrogate_key(["NAME", "MPN", "EAN", "socket_cleaned"]) }}
             as cpu_id,
 
             name,

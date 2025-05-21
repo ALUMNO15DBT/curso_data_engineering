@@ -1,34 +1,34 @@
-{{ 
-  config(
-    materialized='view'
-  )
-}}
+{{ config(materialized="view") }}
 
-WITH market_union AS (
-    SELECT * 
-    FROM {{ source('kaggle', 'amd_stock') }}
+with
+    market_union as (
+        select 'AMD' as vendor, date, open, high, low, close, volume
+        from {{ source("kaggle", "amd_stock") }}
 
-    UNION ALL
+        union all
 
-     SELECT
-        '1980-01-01' AS DATE,
-        '0.0' AS OPEN,
-        '0.0' AS HIGH,
-        '0.0' AS LOW,
-        '0.0' AS CLOSE,
-        '0' AS VOLUME
-),
+        select
+            'AMD' as vendor,
+            '1980-01-01' as date,
+            '0.0' as open,
+            '0.0' as high,
+            '0.0' as low,
+            '0.0' as close,
+            '0' as volume
+    ),
 
-final_transformed AS (
-    SELECT
-        {{ dbt_utils.generate_surrogate_key(['DATE']) }} AS row_id,
-        CAST(DATE AS DATE) AS date,
-        CAST(OPEN AS FLOAT) AS open,
-        CAST(HIGH AS FLOAT) AS high,
-        CAST(LOW AS FLOAT) AS low,
-        CAST(CLOSE AS FLOAT) AS close,
-        CAST(VOLUME AS INT) AS volume
-    FROM market_union
-)
+    final_transformed as (
+        select
+            vendor,
+            {{ dbt_utils.generate_surrogate_key(["DATE", "VENDOR"]) }} as market_id,
+            cast(date as date) as date,
+            cast(open as float) as open,
+            cast(high as float) as high,
+            cast(low as float) as low,
+            cast(close as float) as close,
+            cast(volume as int) as volume
+        from market_union
+    )
 
-SELECT * FROM final_transformed
+select *
+from final_transformed

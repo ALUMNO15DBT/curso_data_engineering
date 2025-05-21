@@ -6,6 +6,7 @@
 
 WITH stock_union AS (
     SELECT
+        'Intel' AS vendor,
         CAST(DATE AS DATE) AS DATE,
         OPEN,
         HIGH,
@@ -17,6 +18,7 @@ WITH stock_union AS (
     UNION ALL
 
     SELECT
+        'Intel' AS vendor,
         '1980-01-01' AS DATE,
         '0.0' AS OPEN,
         '0.0' AS HIGH,
@@ -27,7 +29,8 @@ WITH stock_union AS (
 
 final_transformed AS (
     SELECT
-        {{ dbt_utils.generate_surrogate_key(['DATE', 'OPEN', 'HIGH', 'LOW', 'CLOSE']) }} AS row_id,
+        VENDOR,
+        {{ dbt_utils.generate_surrogate_key(['DATE', 'VENDOR']) }} AS market_id,
         DATE AS date,
         CAST(OPEN AS FLOAT) AS open,
         CAST(HIGH AS FLOAT) AS high,

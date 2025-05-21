@@ -2,8 +2,9 @@
 
 with
     cleaned_gpu as (
-        select
-
+         select
+             {{ dbt_utils.generate_surrogate_key(["NAME", "MPN", "EAN"]) }}
+            as gpu_id,
             name,
             cast(
                 round(

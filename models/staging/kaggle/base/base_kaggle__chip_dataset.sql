@@ -30,8 +30,6 @@ WITH cleaned_data AS (
         CAST(FP64_GFLOPS AS FLOAT) AS fp64_gflops
 
     FROM {{ source('kaggle', 'chip_dataset') }}
-),
-
-
+)
 
 SELECT * FROM cleaned_data
