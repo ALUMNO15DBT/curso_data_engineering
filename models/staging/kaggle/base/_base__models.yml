@@ -51,15 +51,13 @@ models:
     columns:
       - name: name
         data_type: varchar
-      - name: price
+      - name: price_usd
         data_type: varchar
       - name: producer
         data_type: varchar
       - name: mpn
         data_type: varchar
       - name: ean
-        data_type: varchar
-      - name: upc
         data_type: varchar
       - name: base_clock
         data_type: varchar

@@ -34,7 +34,7 @@ models:
         data_type: varchar
       - name: chip
         data_type: varchar
-      - name: price
+      - name: price_usd
         data_type: float
       - name: producer
         data_type: varchar

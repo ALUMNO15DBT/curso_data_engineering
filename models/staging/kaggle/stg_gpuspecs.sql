@@ -2,7 +2,9 @@
 
 with
     referencias_clean as (
-        select chip_id, chip from {{ ref("base_kaggle__chip_dataset") }}
+        select chip_id, chip
+        from {{ ref("base_kaggle__chip_dataset") }}
+where chip not like '%ION%'
     ),
 
     coincidencias as (
@@ -27,9 +29,7 @@ with
             g.memory_clock,
             g.tdp_w,
             g.product_page,
-            row_number() over (
-                partition by g.name order by length(r.chip) desc
-            ) as rn
+            row_number() over (partition by g.name order by length(r.chip) desc) as rn
         from {{ ref("base_kaggle__gpudata") }} g
         join referencias_clean r on lower(g.name) like '%' || lower(r.chip) || '%'
     ),

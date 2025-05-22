@@ -21,7 +21,7 @@ with
             -- PRICE: elimina 'USD' y convierte a float con 2 decimales
             round(
                 cast(replace(replace(price, 'USD', ''), '$', '') as float), 2
-            ) as price,
+            ) as price_USD,
 
             producer,
             mpn,
