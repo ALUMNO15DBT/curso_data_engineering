@@ -1,156 +1,334 @@
-version: 2
-
-models:
+tables:
   - name: amd_stock
+    description: "AMD Stock value through the years"
     columns:
-      - name: date
-        data_type: varchar
-      - name: open
-        data_type: varchar
-      - name: high
-        data_type: varchar
-      - name: low
-        data_type: varchar
-      - name: close
-        data_type: varchar
-      - name: volume
-        data_type: varchar
+      - name: DATE
+        description: "Stock market day"
+        tests:
+          - unique
+          - not_null
+      - name: OPEN
+        description: "Stock value at market open"
+        tests:
+          - not_null
+          - positive_values
+      - name: HIGH
+        description: "Highest value of the stock during the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: LOW
+        description: "Lowest value of the stock during the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: CLOSE
+        description: "Stock value at market close"
+        tests:
+          - not_null
+          - positive_values
+      - name: VOLUME
+        description: "Number of shares traded"
+        tests:
+          - not_null
+          - positive_values
 
   - name: chip_dataset
+    description: "Dataset containing technical specifications of chips (GPU/CPU)"
     columns:
-      - name: orders
-        data_type: varchar
-      - name: chip
-        data_type: varchar
-      - name: types
-        data_type: varchar
-      - name: release_date
-        data_type: varchar
-      - name: process_size_nm
-        data_type: varchar
-      - name: tdp_w
-        data_type: varchar
-      - name: die_size_mmsquare
-        data_type: varchar
-      - name: transistors_million
-        data_type: varchar
-      - name: freq_mhz
-        data_type: varchar
-      - name: foundry
-        data_type: varchar
-      - name: vendor
-        data_type: varchar
-      - name: fp16_gflops
-        data_type: varchar
-      - name: fp32_gflops
-        data_type: varchar
-      - name: fp64_gflops
-        data_type: varchar
+      - name: ORDERS
+        description: "Unique identifier for each chip entry"
+        tests:
+          - unique
+          - not_null
+      - name: CHIP
+        description: "Chip product name"
+        tests:
+          - not_null
+      - name: TYPES
+        description: "Type or category of the chip"
+        tests:
+          - not_null
+      - name: RELEASE_DATE
+        description: "Official release date of the chip"
+        tests:
+          - not_null
+      - name: PROCESS_SIZE_NM
+        description: "Manufacturing process size in nanometers"
+        tests:
+          - positive_values
+      - name: TDP_W
+        description: "Thermal Design Power in watts"
+        tests:
+          - positive_values
+      - name: DIE_SIZE_MMSQUARE
+        description: "Size of the chip die in mm²"
+        tests:
+          - positive_values
+      - name: TRANSISTORS_MILLION
+        description: "Transistor count in millions"
+        tests:
+          - positive_values
+      - name: FREQ_MHZ
+        description: "Base frequency in MHz"
+        tests:
+          - not_null
+          - positive_values
+      - name: FOUNDRY
+        description: "Manufacturer of the chip's foundry process"
+        tests:
+          - not_null
+      - name: VENDOR
+        description: "Brand or company that markets the chip"
+        tests:
+          - not_null
+      - name: FP16_GFLOPS
+        description: "FP16 performance in GFLOPS"
+        tests:
+          - positive_values
+      - name: FP32_GFLOPS
+        description: "FP32 performance in GFLOPS"
+        tests:
+          - positive_values
+      - name: FP64_GFLOPS
+        description: "FP64 performance in GFLOPS"
+        tests:
+          - positive_values
 
   - name: cpudata
+    description: "Detailed information about various CPU products"
     columns:
-      - name: name
-        data_type: varchar
-      - name: price_usd
-        data_type: varchar
-      - name: producer
-        data_type: varchar
-      - name: mpn
-        data_type: varchar
-      - name: ean
-        data_type: varchar
-      - name: base_clock
-        data_type: varchar
-      - name: turbo_clock
-        data_type: varchar
-      - name: unlocked_multiplier
-        data_type: varchar
-      - name: cores
-        data_type: varchar
-      - name: threads
-        data_type: varchar
-      - name: tdp
-        data_type: varchar
-      - name: socket
-        data_type: varchar
-      - name: integrated_gpu
-        data_type: varchar
-      - name: product_page
-        data_type: varchar
+      - name: NAME
+        description: "Name of the CPU model"
+        tests:
+          - not_null
+      - name: PRICE_USD
+        description: "Price in USD"
+      - name: PRODUCER
+        description: "CPU manufacturing company"
+        tests:
+          - not_null
+      - name: MPN
+        description: "Manufacturer Part Number"
+        tests:
+          - not_null
+      - name: EAN
+        description: "European Article Number"
+        tests:
+          - not_null
+          - unique
+      - name: BASE_CLOCK
+        description: "Base operating frequency"
+        tests:
+          - not_null
+      - name: TURBO_CLOCK
+        description: "Maximum boost frequency"
+        tests:
+          - not_null
+      - name: UNLOCKED_MULTIPLIER
+        description: "Whether CPU has an unlocked multiplier"
+        tests:
+          - not_null
+      - name: CORES
+        description: "Number of physical CPU cores"
+        tests:
+          - not_null
+      - name: THREADS
+        description: "Number of threads supported"
+        tests:
+          - not_null
+      - name: TDP
+        description: "Thermal Design Power (Watts)"
+        tests:
+          - not_null
+      - name: SOCKET
+        description: "Supported socket type"
+        tests:
+          - not_null
+      - name: INTEGRATED_GPU
+        description: "Indicates presence of an integrated GPU"
+        tests:
+          - not_null
+      - name: PRODUCT_PAGE
+        description: "Link to the product's official page"
+        tests:
+          - not_null
 
   - name: gpudata
+    description: "Detailed information about various GPU products"
     columns:
-      - name: name
-        data_type: varchar
-      - name: price
-        data_type: varchar
-      - name: producer
-        data_type: varchar
-      - name: mpn
-        data_type: varchar
-      - name: ean
-        data_type: varchar
-      - name: upc
-        data_type: varchar
-      - name: length
-        data_type: varchar
-      - name: slots
-        data_type: varchar
-      - name: eight_pin_connectors
-        data_type: varchar
-      - name: six_pin_connectors
-        data_type: varchar
-      - name: hdmi
-        data_type: varchar
-      - name: displayport
-        data_type: varchar
-      - name: dvi
-        data_type: varchar
-      - name: vga
-        data_type: varchar
-      - name: boost_clock
-        data_type: varchar
-      - name: vram
-        data_type: varchar
-      - name: memory_clock
-        data_type: varchar
-      - name: tdp
-        data_type: varchar
-      - name: product_page
-        data_type: varchar
+      - name: NAME
+        description: "Name of the GPU product"
+        tests:
+          - not_null
+      - name: PRICE
+        description: "Price of the GPU"
+        tests:
+          - not_null
+          - positive_values
+      - name: PRODUCER
+        description: "GPU manufacturer"
+        tests:
+          - not_null
+      - name: MPN
+        description: "Manufacturer Part Number"
+        tests:
+          - not_null
+          - unique
+      - name: EAN
+        description: "European Article Number"
+        tests:
+          - not_null
+          - unique
+      - name: UPC
+        description: "Universal Product Code"
+        tests:
+          - not_null
+          - unique
+      - name: LENGTH
+        description: "Physical length of the GPU"
+        tests:
+          - not_null
+          - positive_values
+      - name: SLOTS
+        description: "Number of slots the GPU occupies"
+        tests:
+          - not_null
+          - positive_values
+      - name: EIGHT_PIN_CONNECTORS
+        description: "Number of 8-pin power connectors"
+        tests:
+          - not_null
+          - positive_values
+      - name: SIX_PIN_CONNECTORS
+        description: "Number of 6-pin power connectors"
+        tests:
+          - not_null
+          - positive_values
+      - name: HDMI
+        description: "Number of HDMI outputs"
+        tests:
+          - not_null
+          - positive_values
+      - name: DISPLAYPORT
+        description: "Number of DisplayPort outputs"
+        tests:
+          - not_null
+          - positive_values
+      - name: DVI
+        description: "Number of DVI outputs"
+        tests:
+          - not_null
+          - positive_values
+      - name: VGA
+        description: "Number of VGA outputs"
+        tests:
+          - not_null
+          - positive_values
+      - name: BOOST_CLOCK
+        description: "Boost frequency of the GPU"
+        tests:
+          - not_null
+          - positive_values
+      - name: VRAM
+        description: "Amount of video RAM"
+        tests:
+          - not_null
+          - positive_values
+      - name: MEMORY_CLOCK
+        description: "Memory clock speed"
+        tests:
+          - not_null
+          - positive_values
+      - name: TDP
+        description: "Thermal Design Power"
+        tests:
+          - not_null
+          - positive_values
+      - name: PRODUCT_PAGE
+        description: "Product's webpage"
+        tests:
+          - not_null
 
   - name: intel_stock
+    description: "Intel Stock value through the years"
     columns:
-      - name: date
-        data_type: varchar
-      - name: open
-        data_type: varchar
-      - name: high
-        data_type: varchar
-      - name: low
-        data_type: varchar
-      - name: close
-        data_type: varchar
-      - name: volume
-        data_type: varchar
-      - name: dividends
-        data_type: varchar
-      - name: stocks_splits
-        data_type: varchar
+      - name: DATE
+        description: "Date of trading activity"
+        tests:
+          - unique
+          - not_null
+      - name: OPEN
+        description: "Opening stock price"
+        tests:
+          - not_null
+          - positive_values
+      - name: HIGH
+        description: "Highest stock price of the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: LOW
+        description: "Lowest stock price of the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: CLOSE
+        description: "Closing stock price"
+        tests:
+          - not_null
+          - positive_values
+      - name: VOLUME
+        description: "Volume of shares traded"
+        tests:
+          - not_null
+          - positive_values
+      - name: DIVIDENDS
+        description: "Dividend paid out per share"
+        tests:
+          - not_null
+          - positive_values
+      - name: STOCKS_SPLITS
+        description: "Split ratio of stocks"
+        tests:
+          - not_null
+          - positive_values
 
   - name: nvidia_stock
+    description: "NVIDIA Stock value through the years"
     columns:
-      - name: date
-        data_type: date
-      - name: open
-        data_type: number
-      - name: high
-        data_type: number
-      - name: low
-        data_type: number
-      - name: close
-        data_type: number
-      - name: adj_close
-        data_type: number
-      - name: volume
-        data_type: number
+      - name: DATE
+        description: "Date of stock trading"
+        tests:
+          - unique
+          - not_null
+      - name: OPEN
+        description: "Opening price of the stock"
+        tests:
+          - not_null
+          - positive_values
+      - name: HIGH
+        description: "Highest stock price during the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: LOW
+        description: "Lowest stock price during the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: CLOSE
+        description: "Closing price of the stock"
+        tests:
+          - not_null
+          - positive_values
+      - name: ADJ_CLOSE
+        description: "Adjusted closing price accounting for dividends/splits"
+        tests:
+          - not_null
+          - positive_values
+      - name: VOLUME
+        description: "Total number of shares traded"
+        tests:
+          - not_null
+          - positive_values

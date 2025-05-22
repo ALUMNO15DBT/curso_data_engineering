@@ -1,157 +1,62 @@
 version: 2
 
 models:
-  - name: stg_cpuchips
+  - name: amd_stock
+    description: "AMD Stock value through the years"
     columns:
-      - name: chip_id
-        data_type: varchar
-      - name: ordinal
-        data_type: number
-      - name: chip
-        data_type: varchar
-      - name: release_date
-        data_type: date
-      - name: process_size_nm
-        data_type: number
-      - name: tdp_w
-        data_type: number
-      - name: die_size_mmsquare
-        data_type: number
-      - name: transistors_million
-        data_type: number
-      - name: freq_mhz
-        data_type: number
-      - name: foundry
-        data_type: varchar
-      - name: vendor
-        data_type: varchar
-
-  - name: stg_cpuspecs
-    columns:
-      - name: cpu_id
-        data_type: varchar
-      - name: name
-        data_type: varchar
-      - name: chip
-        data_type: varchar
-      - name: price_usd
-        data_type: float
-      - name: producer
-        data_type: varchar
-      - name: mpn
-        data_type: varchar
-      - name: ean
-        data_type: varchar
-      - name: upc
-        data_type: varchar
-      - name: base_clock_ghz
-        data_type: float
-      - name: turbo_clock_ghz
-        data_type: float
-      - name: unlocked_multiplier
-        data_type: boolean
-      - name: cores
-        data_type: number
-      - name: threads
-        data_type: number
-      - name: tdp
-        data_type: number
-      - name: socket
-        data_type: varchar
-      - name: integrated_gpu
-        data_type: varchar
-      - name: product_page
-        data_type: varchar
-
-  - name: stg_gpuchips
-    columns:
-      - name: chip_id
-        data_type: varchar
-      - name: ordinal
-        data_type: number
-      - name: chip
-        data_type: varchar
-      - name: release_date
-        data_type: date
-      - name: process_size_nm
-        data_type: number
-      - name: tdp_w
-        data_type: number
-      - name: die_size_mmsquare
-        data_type: number
-      - name: transistors_million
-        data_type: number
-      - name: freq_mhz
-        data_type: number
-      - name: foundry
-        data_type: varchar
-      - name: vendor
-        data_type: varchar
-      - name: fp16_gflops
-        data_type: float
-      - name: fp32_gflops
-        data_type: float
-      - name: fp64_gflops
-        data_type: float
-
-  - name: stg_gpuspecs
-    columns:
-      - name: gpu_id
-        data_type: varchar
-      - name: name
-        data_type: varchar
-      - name: chip
-        data_type: varchar
-      - name: price_usd
-        data_type: float
-      - name: producer
-        data_type: varchar
-      - name: mpn
-        data_type: varchar
-      - name: ean
-        data_type: varchar
-      - name: length_mm
-        data_type: number
-      - name: slots
-        data_type: number
-      - name: eight_pin_connectors
-        data_type: number
-      - name: six_pin_connectors
-        data_type: number
-      - name: hdmi
-        data_type: number
-      - name: displayport
-        data_type: number
-      - name: dvi
-        data_type: number
-      - name: vga
-        data_type: number
-      - name: boost_clock
-        data_type: number
-      - name: vram_gb
-        data_type: number
-      - name: memory_clock
-        data_type: number
-      - name: tdp_w
-        data_type: number
-      - name: product_page
-        data_type: varchar
-
-  - name: stg_markets
-    columns:
-      - name: market_id
-        data_type: varchar
-      - name: vendor
-        data_type: varchar
       - name: date
-        data_type: date
-      - name: close
-        data_type: float
+        description: "Stock market day"
+        tests:
+          - unique
+          - not_null
       - name: open
-        data_type: float
+        description: "Stock value at market open"
+        tests:
+          - not_null
+          - positive_values
       - name: high
-        data_type: float
+        description: "Highest stock value during the day"
+        tests:
+          - not_null
+          - positive_values
       - name: low
-        data_type: float
+        description: "Lowest stock value during the day"
+        tests:
+          - not_null
+          - positive_values
+      - name: close
+        description: "Stock value at market close"
+        tests:
+          - not_null
+          - positive_values
       - name: volume
-        data_type: number
+        description: "Total shares traded on the day"
+        tests:
+          - not_null
+          - positive_values
+
+  - name: chip_dataset
+    description: "General specifications of CPU & GPU chips"
+    columns:
+      - name: orders
+        description: "Unique order identifier"
+        tests:
+          - unique
+          - not_null
+      - name: chip
+        description: "Chip model name"
+        tests:
+          - not_null
+      - name: types
+        description: "Type of chip (e.g., CPU, GPU, APU)"
+        tests:
+          - not_null
+      - name: release_date
+        description: "Date when the chip was released"
+        tests:
+          - not_null
+      - name: process_size_nm
+        description: "Manufacturing process size in nanometers"
+        tests:
+          - positive_values
+      - name: tdp
