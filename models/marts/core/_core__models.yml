@@ -1,0 +1,237 @@
+version: 2
+
+models:
+  - name: dim_company
+    description: ""
+    columns:
+      - name: vendor
+        data_type: varchar
+        description: ""
+
+  - name: dim_date
+    description: ""
+    columns:
+      - name: date_day
+        data_type: date
+        description: ""
+      - name: year
+        data_type: number
+        description: ""
+      - name: month
+        data_type: number
+        description: ""
+      - name: day_of_week
+        data_type: varchar
+        description: ""
+      - name: trimestre
+        data_type: number
+        description: ""
+
+  - name: dim_factory
+    description: ""
+    columns:
+      - name: foundry
+        data_type: varchar
+        description: ""
+
+  - name: dim_producer
+    description: ""
+    columns:
+      - name: vendor
+        data_type: varchar
+        description: ""
+
+  - name: fct_cpus
+    description: ""
+    columns:
+      - name: cpu_id
+        data_type: varchar
+        description: ""
+      - name: name
+        data_type: varchar
+        description: ""
+      - name: price_usd
+        data_type: float
+        description: ""
+      - name: producer
+        data_type: varchar
+        description: ""
+      - name: mpn
+        data_type: varchar
+        description: ""
+      - name: ean
+        data_type: varchar
+        description: ""
+      - name: base_clock_ghz
+        data_type: float
+        description: ""
+      - name: turbo_clock_ghz
+        data_type: float
+        description: ""
+      - name: unlocked_multiplier
+        data_type: boolean
+        description: ""
+      - name: cores
+        data_type: number
+        description: ""
+      - name: threads
+        data_type: number
+        description: ""
+      - name: tdp
+        data_type: number
+        description: ""
+      - name: socket
+        data_type: varchar
+        description: ""
+      - name: integrated_gpu
+        data_type: varchar
+        description: ""
+      - name: product_page
+        data_type: varchar
+        description: ""
+      - name: chip_id
+        data_type: varchar
+        description: ""
+      - name: release_date
+        data_type: date
+        description: ""
+      - name: process_size_nm
+        data_type: number
+        description: ""
+      - name: die_size_mmsquare
+        data_type: number
+        description: ""
+      - name: transistors_million
+        data_type: number
+        description: ""
+      - name: freq_mhz
+        data_type: number
+        description: ""
+      - name: foundry
+        data_type: varchar
+        description: ""
+      - name: vendor
+        data_type: varchar
+        description: ""
+
+  - name: fct_gpus
+    description: ""
+    columns:
+      - name: gpu_id
+        data_type: varchar
+        description: ""
+      - name: name
+        data_type: varchar
+        description: ""
+      - name: chip
+        data_type: varchar
+        description: ""
+      - name: price_usd
+        data_type: float
+        description: ""
+      - name: producer
+        data_type: varchar
+        description: ""
+      - name: mpn
+        data_type: varchar
+        description: ""
+      - name: ean
+        data_type: varchar
+        description: ""
+      - name: length_mm
+        data_type: number
+        description: ""
+      - name: slots
+        data_type: number
+        description: ""
+      - name: eight_pin_connectors
+        data_type: number
+        description: ""
+      - name: six_pin_connectors
+        data_type: number
+        description: ""
+      - name: hdmi
+        data_type: number
+        description: ""
+      - name: displayport
+        data_type: number
+        description: ""
+      - name: dvi
+        data_type: number
+        description: ""
+      - name: vga
+        data_type: number
+        description: ""
+      - name: boost_clock
+        data_type: number
+        description: ""
+      - name: vram_gb
+        data_type: number
+        description: ""
+      - name: memory_clock
+        data_type: number
+        description: ""
+      - name: tdp_w
+        data_type: number
+        description: ""
+      - name: product_page
+        data_type: varchar
+        description: ""
+      - name: release_date
+        data_type: date
+        description: ""
+      - name: process_size_nm
+        data_type: number
+        description: ""
+      - name: die_size_mmsquare
+        data_type: number
+        description: ""
+      - name: transistors_million
+        data_type: number
+        description: ""
+      - name: freq_mhz
+        data_type: number
+        description: ""
+      - name: foundry
+        data_type: varchar
+        description: ""
+      - name: vendor
+        data_type: varchar
+        description: ""
+      - name: fp16_gflops
+        data_type: float
+        description: ""
+      - name: fp32_gflops
+        data_type: float
+        description: ""
+      - name: fp64_gflops
+        data_type: float
+        description: ""
+
+  - name: fct_markets
+    description: ""
+    columns:
+      - name: market_id
+        data_type: varchar
+        description: ""
+      - name: vendor
+        data_type: varchar
+        description: ""
+      - name: date
+        data_type: date
+        description: ""
+      - name: close
+        data_type: float
+        description: ""
+      - name: open
+        data_type: float
+        description: ""
+      - name: high
+        data_type: float
+        description: ""
+      - name: low
+        data_type: float
+        description: ""
+      - name: volume
+        data_type: number
+        description: ""
