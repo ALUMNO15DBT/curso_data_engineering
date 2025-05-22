@@ -1,4 +1,6 @@
-tables:
+version: 2
+
+models:
   - name: amd_stock
     description: "AMD Stock value through the years"
     columns:
